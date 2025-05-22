@@ -1,0 +1,148 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+/* Input Section */
+.input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+#add-task {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#add-task:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.add:hover {
+    background-color: #357abd;
+}
+
+/* To-Do List Section */
+.to-do-list {
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 22px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+}
+
+.delete-button {
+    background: none;
+    color: #ff6b6b;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+    margin-left: 10px;
+}
+
+.delete-button:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+    transform: scale(1.1);
+}
+
+.delete-button:active {
+    transform: scale(0.95);
+}
+
+.list li:hover {
+    background-color: #f0f0f0;
+    transform: translateX(5px);
+}
+
+
+
+/* Clear Button */
+.clr-btn {
+    width: 100%;
+    background-color: #ff6b6b;
+    color: white;
+    margin-top: 10px;
+}
+
+.clr-btn:hover {
+    background-color: #ff5252;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .input {
+        flex-direction: column;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
