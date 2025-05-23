@@ -14,23 +14,25 @@ const errorDisplay = document.getElementById('error-message');
 const forecastContainer = document.getElementById('forecast-items');
 
 // API Configuration
-const apiKey = 'REDACTED'; // Replace with your actual API key
+import { API_KEY } from './config.js';
+const apiKey = API_KEY;
+
 const currentWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 const forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast'; // 5-day forecast with 3-hour intervals
 
-// Initialize app
+// Initializing app
 document.addEventListener('DOMContentLoaded', () => {
   updateDate();
   getCurrentLocationWeather();
 });
 
-// Update current date
+// Updating current date
 function updateDate() {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   dateDisplay.textContent = new Date().toLocaleDateString(undefined, options);
 }
 
-// Get weather forecast data
+// Getting weather forecast data
 async function getWeatherForecast(lat, lon) {
   try {
     const response = await fetch(`${forecastUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
@@ -41,7 +43,7 @@ async function getWeatherForecast(lat, lon) {
   }
 }
 
-// Get weather by coordinates (current location)
+// Getting weather by coordinates (current location)
 async function getWeatherByCoords(lat, lon) {
   try {
     const [currentResponse, forecastResponse] = await Promise.all([
@@ -60,10 +62,10 @@ async function getWeatherByCoords(lat, lon) {
   }
 }
 
-// Get weather by city name
+// Getting weather by city name
 async function getWeatherByCity(city) {
   try {
-    // First get coordinates for the city
+    // First getting coordinates for the city
     const geoResponse = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`);
     if (!geoResponse.ok) throw new Error('City not found');
     
@@ -77,7 +79,7 @@ async function getWeatherByCity(city) {
   }
 }
 
-// Display weather data
+// Displaing weather data
 function displayWeather(data) {
   // Current weather
   locationDisplay.textContent = `${data.current.name}, ${data.current.sys.country}`;
@@ -91,14 +93,14 @@ function displayWeather(data) {
   weatherIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png" 
                           alt="${data.current.weather[0].description}">`;
   
-  // Clear any errors
+  // Clearing any errors
   errorDisplay.textContent = '';
   
-  // Display forecast
+  // Displyaing forecast
   displayForecast(data.forecast);
 }
 
-// Display forecast data
+// Displaying forecast data
 function displayForecast(forecastData) {
   forecastContainer.innerHTML = '';
   
@@ -107,7 +109,7 @@ function displayForecast(forecastData) {
     return;
   }
   
-  // Process forecast data to get daily values
+  // Processing forecast data to get daily values
   const dailyForecast = {};
   
   forecastData.list.forEach(item => {
@@ -129,14 +131,14 @@ function displayForecast(forecastData) {
     }
   });
   
-  // Display forecast for next 10 days (or as many as available)
+  // Displaying forecast for next 10 days (or as many as available)
   const forecastDays = Object.values(dailyForecast).slice(0, 10);
   
   forecastDays.forEach(day => {
     const dayName = day.date.toLocaleDateString(undefined, { weekday: 'short' });
     const weatherCondition = day.weather.main.toLowerCase();
     
-    // Choose appropriate icon based on weather condition
+    // Choosing appropriate icon based on weather condition
     let weatherIcon = '';
     if (weatherCondition.includes('rain')) {
       weatherIcon = '🌧️';
@@ -164,7 +166,7 @@ function displayForecast(forecastData) {
   });
 }
 
-// Get weather for current location
+// Getting weather for current location
 function getCurrentLocationWeather() {
   locationDisplay.textContent = 'Detecting your location...';
   errorDisplay.textContent = '';
