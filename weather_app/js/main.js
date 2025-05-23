@@ -1,3 +1,5 @@
+import { API_KEY } from './config.js';
+
 // DOM Elements
 const enterCity = document.getElementById('city-input');
 const findWeather = document.getElementById('search-btn');
@@ -14,7 +16,7 @@ const errorDisplay = document.getElementById('error-message');
 const forecastContainer = document.getElementById('forecast-items');
 
 // API Configuration
-import { API_KEY } from './config.js';
+
 const apiKey = API_KEY;
 
 const currentWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
